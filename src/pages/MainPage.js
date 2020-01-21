@@ -10,4 +10,4 @@ export const MainPage = () => {
             <Grid/>
         </Layout>
     )
-}
+};

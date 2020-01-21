@@ -1,55 +1,55 @@
-import React, {useState} from 'react'
-import {Layout} from '../components/layout/Layout'
-import {Banner} from '../components/banner/Banner'
-import {LoginForm} from '../components/login/LoginForm'
+import React, {useEffect, useState} from 'react'
+
+import axios from 'axios'
 
 export const Login = () => {
-    const [userName, setUserName] = useState("");
-    const [passWord, setPassword] = useState("");
     const [data, setData] = useState({});
+    const [counter, setCounter] = useState(1);
 
-    const handleUserName = (e) => {
-        return setUserName(e.target.value)
+    useEffect(() => {
+        handleSubmit()
+    }, []);
+
+    const handleIncrease = () => {
+        setCounter(counter + 1);
+        handleSubmit();
     };
-    const handlePassword = (e) => {
-        return setPassword(e.target.value)
+
+    const handleDecrease = () => {
+        setCounter(counter - 1);
+        handleSubmit();
     };
 
     const handleSubmit = () => {
         const options = {
-            method: 'POST',
-            body: JSON.stringify({
-                userName: userName,
-                password: passWord,
-            }),
+            url: `https://jsonplaceholder.typicode.com/posts/${counter}`,
+            method: "GET",
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         };
-        return (
-            fetch('https://jsonplaceholder.typicode.com/posts', options)
-                .then(response => {
-                    return (response.json())
-                })
-                .then(data => {
-                        return (
-                            setData(data)
-                        )
-                    },
-                )
-        )
+        axios(options)
+            .then((response) => {
+                return setData(response.data)
+            })
+    };
+
+    const copyCounter = (creds) => e =>{
+        let clipBoard = document.createElement("textarea");
+        document.body.appendChild(clipBoard);
+        clipBoard.value = creds;
+        clipBoard.select();
+        document.execCommand("copy");
+        document.body.removeChild(clipBoard)
     };
 
     return (
-        <Layout>
-            <Banner/>
-            <LoginForm
-                userName={userName}
-                handleUserName={handleUserName}
-                passWord={passWord}
-                handlePassword={handlePassword}
-                handleSubmit={handleSubmit}
-            />
-        </Layout>
+        <div>
+            <h1>{counter}</h1>
+            <button onClick={handleIncrease}>add one</button>
+            <button onClick={handleDecrease}>Subtract one</button>
+            <button onClick={copyCounter(counter)}>Click to copy number in counter</button>
+        </div>
+
     )
 };
