@@ -13,8 +13,8 @@ export const LoginForm = (props) => {
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email"
                                           placeholder="Enter email"
-                                          value={props.userName}
-                                          onChange={props.handleUserName}/>
+                                          value={props.username}
+                                          onChange={props.handleUser}/>
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -23,8 +23,8 @@ export const LoginForm = (props) => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password"
                                           placeholder="Password"
-                                          value={props.passWord}
-                                          onChange={props.handlePassword}/>
+                                          value={props.password}
+                                          onChange={props.handlePass}/>
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out"/>

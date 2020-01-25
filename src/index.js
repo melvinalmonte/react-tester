@@ -4,7 +4,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
 import {MainPage} from './pages/MainPage'
 import { Login } from './pages/Login'
-require('../node_modules/bootstrap/dist/css/bootstrap.css')
+require('../node_modules/bootstrap/dist/css/bootstrap.css');
 
 ReactDOM.render(
     <BrowserRouter> 
